@@ -15,8 +15,8 @@ const Page: FC = () => {
           <br className="hidden md:flex" /> taking and Management tool
         </h2>
         <p className="text-xl max-w-xl text-center ">
-          I&apos;m building a web app with Next.js 13 and open sourcing
-          everything. Follow along as we figure this out together.
+          I am building a web app with Next.js 13 and open sourcing everything.
+          Follow along as we figure this out together.
         </p>
         <div className="w-full px-8 mt-2 flex items-center justify-center">
           <button className="p-4 text-lg mx-4 rounded-lg  dark:bg-blue-700">
