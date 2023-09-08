@@ -4,9 +4,6 @@ import React, { FC, useEffect, useState } from "react";
 import { VscGithub, VscTwitter } from "react-icons/vsc";
 
 const Page: FC = () => {
-
-
-
   return (
     <div className="w-full  min-h-screen flex flex-col items-center justify-center ">
       <section className="max-w-4xl w-full  flex flex-col gap-3 items-center justify-center">
@@ -18,11 +15,17 @@ const Page: FC = () => {
           <br className="hidden md:flex" /> taking and Management tool
         </h2>
         <p className="text-xl max-w-xl text-center ">
-          I'm building a web app with Next.js 13 and open sourcing everything. Follow along as we figure this out together.
+          I'm building a web app with Next.js 13 and open sourcing everything.
+          Follow along as we figure this out together.
         </p>
         <div className="w-full px-8 mt-2 flex items-center justify-center">
-          <button className="p-4 text-lg mx-4 rounded-lg  dark:bg-blue-700">Get Started</button>
-          <button className="p-4 text-lg mx-4 rounded-lg flex items-center justify-center gap-x-2 dark:bg-dark-btn"> <VscGithub className="text-lg font-bold" /> Github</button>
+          <button className="p-4 text-lg mx-4 rounded-lg  dark:bg-blue-700">
+            Get Started
+          </button>
+          <button className="p-4 text-lg mx-4 rounded-lg flex items-center justify-center gap-x-2 dark:bg-dark-btn">
+            {" "}
+            <VscGithub className="text-lg font-bold" /> Github
+          </button>
         </div>
       </section>
     </div>
