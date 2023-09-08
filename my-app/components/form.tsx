@@ -1,4 +1,5 @@
 "use client";
+import basepath from "@/lib/path";
 import { User } from "@/lib/types";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
@@ -31,7 +32,9 @@ const AuthForm = ({ type }: AuthFormProps) => {
           event.preventDefault();
           setIsLoading(true);
           const res = await fetch(
-            `${type === "register" ? "/api/auth/register" : "http://localhost:8000/login"}`,
+            `${
+              type === "register" ? "/api/auth/register" : `${basepath}/login`
+            }`,
             {
               method: "POST",
               headers: {
@@ -51,19 +54,19 @@ const AuthForm = ({ type }: AuthFormProps) => {
             }
           );
           // if (res.ok) {
-            const data = await res.json();
-            console.log(data);
-            setCookie("token", data?.token);
-            setCookie("user", data?.user?.ID);
-            setIsLoading(false);
-            toast.success(
-              `${
-                type === "login"
-                  ? "SignedIn successfully"
-                  : "User successfully created"
-              }`
-            );
-            router.push("/dashboard");
+          const data = await res.json();
+          console.log(data);
+          setCookie("token", data?.token);
+          setCookie("user", data?.user?.ID);
+          setIsLoading(false);
+          toast.success(
+            `${
+              type === "login"
+                ? "SignedIn successfully"
+                : "User successfully created"
+            }`
+          );
+          router.push("/dashboard");
           // } else {
           //   const err = await res.json();
           //   err && toast.error(`Error: Login with correct credentials`);
