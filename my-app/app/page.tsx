@@ -1,11 +1,34 @@
 "use client";
 
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { VscGithub, VscTwitter } from "react-icons/vsc";
 
 const Page: FC = () => {
   return (
-    <div className="w-full  min-h-screen flex flex-col items-center justify-center "></div>
+    <div className="w-full  min-h-screen flex flex-col items-center justify-center ">
+      <section className="max-w-4xl w-full  flex flex-col gap-3 items-center justify-center">
+        <span className="rounded-3xl flex items-center justify-center gap-x-2 px-4 py-2 mb-2 dark:bg-dark-btn">
+          <VscTwitter className="text-lg font-bold" /> Follow along on twitter
+        </span>
+        <h2 className="w-full  text-4xl md:text-6xl text-center font-bold">
+          <span className="text-blue-600  "> Modern & Minimal </span> Note
+          <br className="hidden md:flex" /> taking and Management tool
+        </h2>
+        <p className="text-xl max-w-xl text-center ">
+          I&apos;m building a web app with Next.js 13 and open sourcing
+          everything. Follow along as we figure this out together.
+        </p>
+        <div className="w-full px-8 mt-2 flex items-center justify-center">
+          <button className="p-4 text-lg mx-4 rounded-lg  dark:bg-blue-700">
+            Get Started
+          </button>
+          <button className="p-4 text-lg mx-4 rounded-lg flex items-center justify-center gap-x-2 dark:bg-dark-btn">
+            {" "}
+            <VscGithub className="text-lg font-bold" /> Github
+          </button>
+        </div>
+      </section>
+    </div>
   );
 };
 export default Page;
