@@ -1,8 +1,10 @@
+import basepath from "@/lib/path";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   const { email, password } = await req.json();
-  const res = await fetch("http://localhost:8000/login", {
+
+  const res = await fetch(`${basepath}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,12 +15,7 @@ export async function POST(req: NextRequest) {
     }),
   });
   const data = await res.json();
-  if (!res.ok) {
-    return NextResponse.json({
-      status: false,
-      // error: `Login using correct credentials`,
-    });
-  }
+
   return NextResponse.json({
     status: true,
     token: data?.token,

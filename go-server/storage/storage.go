@@ -1,4 +1,4 @@
-package main
+package storage
 
 import (
 	"database/sql"
@@ -32,9 +32,6 @@ func (s *Storage) Init() error {
 	return s.CreateTables()
 }
 
-// func (s *Storage) FetchAllNotes(id int) error {
-// 	s.db.Model(&types.Note{}).Where("userid = ?", id)
-// }
 
 func (s *Storage) CreateUser(u *types.User) (*types.User, error) {
 	user := types.User{
@@ -46,12 +43,6 @@ func (s *Storage) CreateUser(u *types.User) (*types.User, error) {
 	if result.Error != nil {
 		return nil, result.Error
 	}
-	// var createdUser types.User
-	// err := s.db.Model(&types.User{}).Where("email = ?", u.Email).Find(&createdUser)
-	// if err.Error != nil {
-	// 	return nil, result.Error
-	// }
-	// fmt.Println(createdUser)
 	return &user, nil
 
 }
@@ -162,12 +153,20 @@ func (s *Storage) DeleteNote(noteId string) error {
 func (s *Storage) GetNoteByID(id string) (*types.Note, error) {
 	note := new(types.Note)
 
-	rows, err := s.db.Model(&types.Note{}).Where("ID = ?", id).Omit("UserId", "DeletedAt").Rows()
+	rows, err := s.db.Model(&types.Note{}).Where("ID = ?", id).Omit("DeletedAt").Rows()
 	if err != nil {
 		return nil, err
 	}
 	for rows.Next() {
-		err := rows.Scan(&note.ID, &note.CreatedAt, &note.UpdatedAt, &note.Title, &note.Content, &note.Tags)
+		err := rows.Scan(
+			&note.ID,
+			&note.CreatedAt,
+			&note.UpdatedAt,
+			&note.Title,
+			&note.Content,
+			&note.Tags,
+			&note.UserId,
+		)
 		if err != nil {
 			return nil, err
 		}

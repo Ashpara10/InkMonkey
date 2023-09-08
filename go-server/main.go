@@ -1,9 +1,14 @@
 package main
 
-import "log"
+import (
+	"log"
+
+	"github.com/Ashpara10/server/server"
+	"github.com/Ashpara10/server/storage"
+)
 
 func main() {
-	store, err := NewMySqlStorage()
+	store, err := storage.NewMySqlStorage()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -11,6 +16,6 @@ func main() {
 		log.Fatal(err)
 
 	}
-	server := Server("localhost:8000", store)
+	server := server.Server("localhost:8000", store)
 	server.Start()
 }

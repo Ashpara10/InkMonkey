@@ -1,3 +1,4 @@
+"use client"
 import { Note } from "@/lib/types";
 import React from "react";
 import { VscEdit, VscEllipsis, VscTrash } from "react-icons/vsc";
@@ -11,16 +12,19 @@ import {
 } from "./ui/dropdown-menu";
 import { HandleDeleteNote } from "@/lib/actions";
 import { Toaster, toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
 
 const NoteItem = ({ note }: { note: Note }) => {
-  const { ID, Title, Tags, CreatedAt } = note;
+  const { ID, Title, Tags, CreatedAt,UserId } = note;
   const date = new Date(CreatedAt as string).toLocaleDateString();
+  const router=useRouter()
 
   return (
     <article className="w-full px-4 py-3 gap-3 flex flex-col items-center justify-center rounded-lg border dark:border-dark-btn">
       <Toaster position="bottom-left" />
       <div className="w-full flex items-center justify-between">
-        <h2 className="w-full text-left text-2xl font-bold">{Title}</h2>
+        <h2 className="w-full text-left text-2xl font-bold" onClick={()=>router.push(`/dashboard/note/${UserId}/${ID}`)}>{Title}</h2>
         <DropdownMenu>
           <DropdownMenuTrigger>
             <button className="p-1 hover:dark:bg-dark-btn rounded-lg">

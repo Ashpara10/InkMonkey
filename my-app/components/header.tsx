@@ -14,11 +14,11 @@ const Header = () => {
 
 
   return (
-    <header className="w-full  dark:bg-dark sticky top-0 z-20 px-6 py-2 flex items-center justify-center">
+    <header suppressHydrationWarning className="w-full  dark:bg-dark sticky top-0 z-20 px-6 py-2 flex items-center justify-center">
       <nav className="max-w-4xl w-full  flex items-center justify-between">
         <span className="flex items-center justify-center gap-x-2 ">
           <Logo />
-          <span className="text-xl font-bold">InkMonkey</span>
+          <span className="text-xl font-bold">Inkmon</span>
         </span>
         <div className="flex items-center justify-center gap-x-3">
           <span>
@@ -28,26 +28,24 @@ const Header = () => {
               data?.Email
             )}
           </span>
-          {typeof window !== "undefined" && !token ? (
-            <button
-              onClick={() => router.push("/user/login")}
-              className="px-3 flex items-center justify-center gap-x-2 py-1.5 rounded-full bg-blue-700 text-white"
-            >
-              Signup <VscArrowRight />
-            </button>
-          ) : (
-            <button
-              onClick={() => {
+          <button
+            onClick={() => {
+              if (typeof window !== "undefined" && !token) {
+                router.push("/user/login")
+
+              }
+              else {
                 deleteCookie("user");
                 deleteCookie("token");
                 router.refresh();
-              }}
-              className="px-4 flex items-center justify-center gap-x-2 py-1.5 rounded-full bg-gray-300 text-black  
-              dark:bg-dark-btn dark:text-white"
-            >
-              Signout <VscArrowRight />
-            </button>
-          )}
+              }
+            }}
+            className={`px-4 flex items-center justify-center gap-x-2 py-1.5 rounded-full ${typeof window !== "undefined" && !token ? "bg-blue-700 text-white" : "bg-gray-300 text-black dark:bg-dark-btn dark:text-white"}`}
+          >
+            {typeof window !== "undefined" && !token ?
+              <> Signup <VscArrowRight /></> : <>  Signout <VscArrowRight /></>}
+          </button>
+
         </div>
       </nav>
     </header>

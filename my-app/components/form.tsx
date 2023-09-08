@@ -31,7 +31,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
           event.preventDefault();
           setIsLoading(true);
           const res = await fetch(
-            `/api/auth/${type === "register" ? "register" : "login"}`,
+            `${type === "register" ? "/api/auth/register" : "http://localhost:8000/login"}`,
             {
               method: "POST",
               headers: {
@@ -50,11 +50,11 @@ const AuthForm = ({ type }: AuthFormProps) => {
                     }),
             }
           );
-          if (res.ok) {
-            const { data, token } = await res.json();
+          // if (res.ok) {
+            const data = await res.json();
             console.log(data);
-            setCookie("token", token);
-            setCookie("user", data?.ID);
+            setCookie("token", data?.token);
+            setCookie("user", data?.user?.ID);
             setIsLoading(false);
             toast.success(
               `${
@@ -64,11 +64,11 @@ const AuthForm = ({ type }: AuthFormProps) => {
               }`
             );
             router.push("/dashboard");
-          } else {
-            const { status } = await res.json();
-            !status && toast.error(`Error: Login with correct credentials`);
-            console.log({ form: status });
-          }
+          // } else {
+          //   const err = await res.json();
+          //   err && toast.error(`Error: Login with correct credentials`);
+          //   console.log({ form: err });
+          // }
         }}
       >
         {type === "register" && (

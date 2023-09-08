@@ -1,8 +1,9 @@
-package main
+package server
 
 import (
 	"fmt"
 
+	"github.com/Ashpara10/server/storage"
 	"github.com/Ashpara10/server/types"
 	t "github.com/Ashpara10/server/types"
 	"github.com/gofiber/fiber/v2"
@@ -12,10 +13,10 @@ import (
 
 type ApiServer struct {
 	port  string
-	store *Storage
+	store *storage.Storage
 }
 
-func Server(port string, store *Storage) *ApiServer {
+func Server(port string, store *storage.Storage) *ApiServer {
 
 	return &ApiServer{
 		port:  port,

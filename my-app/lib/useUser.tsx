@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import basepath from "./path";
 type User = {
   Id: number;
   Username: string;
   Email: string;
   Password: string;
 };
-const ENDPOINT = "http://localhost:8000";
 const useUser = (id: string) => {
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ const useUser = (id: string) => {
   useEffect(() => {
     const getUserById = async () => {
       setLoading(true);
-      const res = await fetch(`${ENDPOINT}/user/${id}`);
+      const res = await fetch(`${basepath}/user/${id}`);
       const data = await res.json();
       if (res.ok) {
         setLoading(false);

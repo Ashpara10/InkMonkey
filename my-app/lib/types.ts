@@ -13,4 +13,5 @@ export type Note = {
   Tags: string;
   CreatedAt?: string;
   UpdatedAt?: string;
+  UserId?:string
 };
