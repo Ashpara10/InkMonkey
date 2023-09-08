@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { VscGithub, VscTwitter } from "react-icons/vsc";
 
 const Page: FC = () => {
@@ -14,10 +14,7 @@ const Page: FC = () => {
           <span className="text-blue-600  "> Modern & Minimal </span> Note
           <br className="hidden md:flex" /> taking and Management tool
         </h2>
-        <p className="text-xl max-w-xl text-center ">
-          I'm building a web app with Next.js 13 and open sourcing everything.
-          Follow along as we figure this out together.
-        </p>
+
         <div className="w-full px-8 mt-2 flex items-center justify-center">
           <button className="p-4 text-lg mx-4 rounded-lg  dark:bg-blue-700">
             Get Started
