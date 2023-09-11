@@ -14,7 +14,7 @@ const Dashboard = ({ notes }: { notes: Note[] }) => {
   const router = useRouter();
   useEffect(() => {
     setNote(notes);
-  }, [notes]);
+  }, [notes, setNote]);
   return (
     <div className="w-full my-10 px-4 flex flex-col items-center justify-center">
       <div className="max-w-3xl w-full px-2  mb-4 flex flex-col items-center justify-center">
