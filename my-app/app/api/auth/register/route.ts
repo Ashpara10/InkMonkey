@@ -1,9 +1,10 @@
+import basepath from "@/lib/path";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   const { username, email, password } = await req.json();
   let ErrorMessage;
-  const res = await fetch(`http://localhost:8000/api/v1/signup`, {
+  const res = await fetch(`${basepath}/api/v1/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

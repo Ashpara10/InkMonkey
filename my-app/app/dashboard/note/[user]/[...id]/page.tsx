@@ -13,7 +13,7 @@ const getNoteByID = async (
     headers: {
       "Auth-Token": token as string,
     },
-    cache: "force-cache",
+    cache: "no-store",
   });
   const data = await res.json();
   if (!res.ok) return { status: false, note: null };

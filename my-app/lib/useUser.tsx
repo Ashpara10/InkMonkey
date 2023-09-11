@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import basepath from "./path";
-type User = {
-  Id: number;
-  Username: string;
-  Email: string;
-  Password: string;
-};
+import { User } from "./types";
+
 const useUser = (id: string) => {
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState(false);

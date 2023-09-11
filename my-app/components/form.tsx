@@ -2,6 +2,7 @@
 import basepath from "@/lib/path";
 import { User } from "@/lib/types";
 import { setCookie } from "cookies-next";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -19,8 +20,11 @@ const AuthForm = ({ type }: AuthFormProps) => {
     Password: "",
   });
   return (
-    <div className="flex flex-col  items-center shadow-lg shadow-stone-500 dark:shadow-[#151515] rounded-xl justify-center max-w-sm w-full">
-      <Toaster position="top-center" />
+    <div className="flex flex-col mx-4 items-center shadow-lg shadow-stone-500 dark:shadow-[#121212] rounded-xl justify-center max-w-sm w-full">
+      <Toaster
+        toastOptions={{ className: "dark:bg-dark dark:text-white shadow-md" }}
+        position="bottom-center"
+      />
       <div className="w-full  flex items-center justify-center mt-10 mb-4">
         <span className="w-full text-center text-4xl  font-bold">
           {type === "register" ? "Signup" : "Login"}
@@ -53,7 +57,6 @@ const AuthForm = ({ type }: AuthFormProps) => {
                     }),
             }
           );
-          // if (res.ok) {
           const data = await res.json();
           console.log(data);
           setCookie("token", data?.token);
@@ -67,11 +70,6 @@ const AuthForm = ({ type }: AuthFormProps) => {
             }`
           );
           router.push("/dashboard");
-          // } else {
-          //   const err = await res.json();
-          //   err && toast.error(`Error: Login with correct credentials`);
-          //   console.log({ form: err });
-          // }
         }}
       >
         {type === "register" && (
@@ -120,6 +118,27 @@ const AuthForm = ({ type }: AuthFormProps) => {
             "Login"
           )}
         </button>
+        {type === "login" ? (
+          <span className="dark:text-gray-300">
+            Don't have an account?{" "}
+            <Link
+              className="dark:text-blue-400 hover:underline"
+              href={"/user/register"}
+            >
+              Register here
+            </Link>
+          </span>
+        ) : (
+          <span className="dark:text-gray-300">
+            Already have an account?
+            <Link
+              className="dark:text-blue-400 hover:underline"
+              href={"/user/login"}
+            >
+              Login
+            </Link>
+          </span>
+        )}
       </form>
     </div>
   );

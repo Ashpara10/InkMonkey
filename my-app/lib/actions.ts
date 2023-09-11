@@ -2,7 +2,7 @@ import { getCookie } from "cookies-next";
 import { Note } from "./types";
 import basepath from "./path";
 
-export const HandleCreateNote = async (note: Note): Promise<{ note: Note, status: boolean }> => {
+export const create_note = async (note: Note): Promise<{ note: Note, status: boolean }> => {
   const userId = getCookie("user");
   const token = getCookie("token");
   const res = await fetch(
@@ -30,7 +30,7 @@ export const HandleCreateNote = async (note: Note): Promise<{ note: Note, status
 
 
 export const getNotes = async (
-  id: number,
+  id: string,
   token: string
 ): Promise<{ notes: Note[] }> => {
   const res = await fetch(`${basepath}/api/v1/note/${id}/getnotes`, {
@@ -38,7 +38,7 @@ export const getNotes = async (
       "Content-Type": "application/json",
       "Auth-Token": String(token),
     },
-    cache: "no-cache"
+  cache:"no-store"
   });
   const resp = await res.json();
   return { notes: resp?.data };

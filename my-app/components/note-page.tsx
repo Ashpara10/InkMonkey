@@ -2,13 +2,15 @@
 import { HandleUpdateNote } from "@/lib/actions";
 import { Note } from "@/lib/types";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import { VscArrowLeft, VscLoading } from "react-icons/vsc";
 import TextAreaAutoSize from "react-textarea-autosize";
-import EditorJS from "@editorjs/editorjs";
+import NoteContext from "@/lib/note-context";
 
 const NotePage = ({ data }: { data: null | Note; status?: boolean }) => {
+  const { note } = useContext(NoteContext);
+  console.log({ notepagecontext: note });
   const router = useRouter();
   const [updatedNote, setUpdatedNote] = useState<Note>({
     Title: data?.Title as string,
@@ -24,23 +26,13 @@ const NotePage = ({ data }: { data: null | Note; status?: boolean }) => {
     !status && toast.error("An unexpected error occured");
     status && toast.success("Saved successfully");
   };
-  // const editor = new EditorJS({
-  //   holder: "editor",
-  //   inlineToolbar: true,
-  //   data: {
-  //     blocks: [
-  //       {
-  //         type: "paragraph",
-  //         data: {
-  //           text: data?.Content,
-  //         },
-  //       },
-  //     ],
-  //   },
-  // });
+
   return (
     <div className=" w-full min-h-screen flex flex-col items-center justify-center">
-      <Toaster position="top-center" />
+      <Toaster
+        toastOptions={{ className: "dark:bg-dark dark:text-white shadow-md" }}
+        position="bottom-center"
+      />
       <div className="max-w-4xl w-full flex items-center justify-between ">
         <button
           onClick={() => router.back()}
