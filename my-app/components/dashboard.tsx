@@ -44,7 +44,7 @@ const Dashboard = ({ notes }: { notes: Note[] }) => {
       </div>
       <section className="max-w-3xl w-full gap-2 grid grid-cols-1 sm:grid-cols-2">
         {note?.map((data) => {
-          return <NoteItem note={data} />;
+          return <NoteItem key={data?.ID} note={data} />;
         })}
       </section>
     </div>
