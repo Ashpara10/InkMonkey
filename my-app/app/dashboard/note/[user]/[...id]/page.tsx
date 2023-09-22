@@ -24,7 +24,7 @@ const Page = async ({ params }: { params: { user: string; id: string } }) => {
   const { note, status } = await getNoteByID(params?.user, params?.id);
 
   return (
-    <div className="w-full min-h-screen p-4 flex flex-col items-center justify-center">
+    <div className="w-full mt-20 min-h-screen p-4 flex flex-col items-center justify-center">
       <NotePage data={note} status={status} />
     </div>
   );

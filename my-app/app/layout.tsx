@@ -2,7 +2,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Theme from "../lib/theme";
-import Header from "@/components/header";
 import { Provider } from "react-wrap-balancer";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,7 +23,6 @@ export default function RootLayout({
         className={`${inter.className} min-h-screen flex flex-col w-full dark:bg-[#202020] bg-gray-50`}
       >
         <Provider>
-          <Header />
           <main className=" w-full flex flex-col items-center justify-center ">
             <Theme>{children}</Theme>
           </main>

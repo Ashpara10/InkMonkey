@@ -15,31 +15,34 @@ import { Toaster, toast } from "react-hot-toast";
 import { usePathname, useRouter } from "next/navigation";
 import { Balancer } from "react-wrap-balancer";
 import NoteContext from "@/lib/note-context";
+import { Button } from "@/components/ui/button";
+import { DropdownMenuCheckboxes } from "./dropdown-menu";
 
 const NoteItem = ({ note }: { note: Note }) => {
   const { ID, Title, Tags, CreatedAt, UserId } = note;
-  const date = new Date(CreatedAt as string).toLocaleDateString();
+  const date = new Date(CreatedAt as string).toDateString();
   const router = useRouter();
   const { note: notes, setNote } = useContext(NoteContext);
   return (
-    <article className="w-full px-4 py-3 gap-3 flex flex-col items-center justify-between rounded-lg border dark:border-dark-btn">
+    <article className="w-full min-h-[300px] px-4 py-3 gap-3 flex flex-col items-center justify-between rounded-2xl border dark:border-dark-btn">
       <Toaster
         toastOptions={{ className: "dark:bg-dark dark:text-white shadow-md" }}
         position="bottom-center"
       />
-      <div className="w-full flex items-center gap-x-2 justify-between">
-        <h2
-          className="w-full text-left text-2xl font-bold"
-          onClick={() => router.push(`/dashboard/note/${UserId}/${ID}`)}
-        >
-          <Balancer>{Title}</Balancer>
-        </h2>
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <button className="p-1 hover:dark:bg-dark-btn rounded-lg">
-              <VscEllipsis className="text-lg font-bold " />
-            </button>
-          </DropdownMenuTrigger>
+      <div className="w-full flex flex-col items-center gap-x-2 ">
+        <DropdownMenuCheckboxes>
+          <button className="rounded-lg bg-transparent">
+            <VscEllipsis className="text-lg font-bold " />
+          </button>
+        </DropdownMenuCheckboxes>
+        {/* <DropdownMenu>
+          <div className="w-full flex items-center justify-end">
+            <DropdownMenuTrigger>
+              <button className="p-1 hover:dark:bg-dark-btn rounded-lg">
+                <VscEllipsis className="text-lg font-bold " />
+              </button>
+            </DropdownMenuTrigger>
+          </div>
           <DropdownMenuContent className="dark:bg-dark">
             <DropdownMenuLabel>Options</DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -62,7 +65,13 @@ const NoteItem = ({ note }: { note: Note }) => {
               Delete <VscTrash className="text-xl" />
             </DropdownMenuItem>
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
+        <h2
+          className="w-full text-left text-2xl font-bold"
+          onClick={() => router.push(`/dashboard/note/${UserId}/${ID}`)}
+        >
+          <Balancer>{Title}</Balancer>
+        </h2>
       </div>
       <div className="w-full flex items-center justify-between">
         <span>{date}</span>

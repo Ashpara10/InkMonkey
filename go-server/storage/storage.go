@@ -14,7 +14,7 @@ type Storage struct {
 }
 
 func NewMySqlStorage() (*Storage, error) {
-	store, err := gorm.Open(postgres.Open("postgres://default:dUB3LGpXWj2I@ep-autumn-moon-546240.us-east-1.postgres.vercel-storage.com:5432/verceldb"), &gorm.Config{})
+	store, err := gorm.Open(postgres.Open("postgres://default:dUB3LGpXWj2I@ep-autumn-moon-546240.us-east-1.postgres.vercel-storage.com:5432/verceldb?sslmode=require"), &gorm.Config{})
 	if err != nil {
 		return nil, err
 	}
@@ -31,7 +31,6 @@ func (s *Storage) CreateTables() error {
 func (s *Storage) Init() error {
 	return s.CreateTables()
 }
-
 
 func (s *Storage) CreateUser(u *types.User) (*types.User, error) {
 	user := types.User{
