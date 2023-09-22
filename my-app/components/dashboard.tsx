@@ -16,6 +16,7 @@ const Dashboard = ({ notes }: { notes: Note[] }) => {
   useEffect(() => {
     setNote(notes);
   }, [notes, setNote]);
+  const sortedArr = notes?.sort((a, b) => Number(b.ID) - Number(a.ID));
   return (
     <div className="w-full my-10 px-4 flex flex-col items-center justify-center">
       <div className=" w-full px-2  mb-4 flex flex-col items-center justify-center">
@@ -37,9 +38,9 @@ const Dashboard = ({ notes }: { notes: Note[] }) => {
 
                 toast.success("Note successfully created");
                 setNote(note?.concat(newNote) as Note[]);
-                // router.push(
-                //   `/dashboard/note/${newNote?.UserId}/${newNote?.ID}`
-                // );
+                router.push(
+                  `/dashboard/note/${newNote?.UserId}/${newNote?.ID}`
+                );
               }
             }}
             className="text-lg flex items-center justify-center gap-x-2 dark:text-black dark:bg-white rounded-xl px-4 py-2"
@@ -50,7 +51,7 @@ const Dashboard = ({ notes }: { notes: Note[] }) => {
         </div>
       </div>
       <section className=" w-full gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        {note?.map((data) => {
+        {sortedArr?.map((data) => {
           return <NoteItem key={data?.ID} note={data} />;
         })}
       </section>

@@ -1,22 +1,13 @@
 "use client";
 import { Note } from "@/lib/types";
 import React, { useContext } from "react";
-import { VscEdit, VscEllipsis, VscTrash } from "react-icons/vsc";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { HandleDeleteNote } from "@/lib/actions";
-import { Toaster, toast } from "react-hot-toast";
-import { usePathname, useRouter } from "next/navigation";
+import { MoreHorizontal } from "lucide-react";
+import { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 import { Balancer } from "react-wrap-balancer";
 import NoteContext from "@/lib/note-context";
 import { Button } from "@/components/ui/button";
-import { DropdownMenuCheckboxes } from "./dropdown-menu";
+import { Menu } from "./dropdown-menu";
 
 const NoteItem = ({ note }: { note: Note }) => {
   const { ID, Title, Tags, CreatedAt, UserId } = note;
@@ -29,12 +20,14 @@ const NoteItem = ({ note }: { note: Note }) => {
         toastOptions={{ className: "dark:bg-dark dark:text-white shadow-md" }}
         position="bottom-center"
       />
-      <div className="w-full flex flex-col items-center gap-x-2 ">
-        <DropdownMenuCheckboxes>
-          <button className="rounded-lg bg-transparent">
-            <VscEllipsis className="text-lg font-bold " />
-          </button>
-        </DropdownMenuCheckboxes>
+      <div className="w-full flex flex-col gap-2 ">
+        <div className="w-full flex justify-end items-center">
+          <Menu Id={String(note?.ID)} notes={notes as Note[]}>
+            <button className="rounded-lg bg-transparent p-0.5 ">
+              <MoreHorizontal className="text-lg font-bold " />
+            </button>
+          </Menu>
+        </div>
         {/* <DropdownMenu>
           <div className="w-full flex items-center justify-end">
             <DropdownMenuTrigger>
