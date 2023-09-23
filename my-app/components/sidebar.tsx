@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const Sidebar = ({ open }: { open: boolean }) => {
   return (
     <motion.aside
-      className="border-r sticky top-0 dark:border-dark-btn overflow-hidden  h-screen"
+      className="border-r dark:bg-dark z-10 absolute md:sticky top-0 dark:border-dark-btn overflow-hidden  h-screen"
       initial={{
         width: 0,
       }}
