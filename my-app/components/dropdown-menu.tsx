@@ -22,10 +22,10 @@ export function Menu({
   Id,
 }: {
   children: React.ReactNode;
-  notes: Note[];
+  notes?: Note[];
   Id: string;
 }) {
-  const { setNote } = React.useContext(NoteContext);
+  const { note, setNote } = React.useContext(NoteContext);
   return (
     <DropdownMenu>
       <Toaster
@@ -37,7 +37,7 @@ export function Menu({
         <DropdownMenuItem
           onClick={async () => {
             const { data, status } = await HandleDeleteNote(Id as string);
-            const filteredArray = notes?.filter((e) => {
+            const filteredArray = note?.filter((e) => {
               return e.ID !== Id;
             });
             console.log(filteredArray);

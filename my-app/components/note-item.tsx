@@ -22,7 +22,7 @@ const NoteItem = ({ note }: { note: Note }) => {
       />
       <div className="w-full flex flex-col gap-2 ">
         <div className="w-full flex justify-end items-center">
-          <Menu Id={String(note?.ID)} notes={notes as Note[]}>
+          <Menu Id={String(note?.ID)}>
             <button className="rounded-lg bg-transparent p-0.5 ">
               <MoreHorizontal className="text-lg font-bold " />
             </button>

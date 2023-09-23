@@ -16,7 +16,7 @@ const Dashboard = ({ notes }: { notes: Note[] }) => {
   useEffect(() => {
     setNote(notes);
   }, [notes, setNote]);
-  const sortedArr = notes?.sort((a, b) => Number(b.ID) - Number(a.ID));
+  const sortedArr = note?.sort((a, b) => Number(b.ID) - Number(a.ID));
   return (
     <div className="w-full my-10 px-4 flex flex-col items-center justify-center">
       <div className=" w-full px-2  mb-4 flex flex-col items-center justify-center">
