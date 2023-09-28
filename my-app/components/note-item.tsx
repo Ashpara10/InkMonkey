@@ -5,7 +5,6 @@ import { MoreHorizontal } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Balancer } from "react-wrap-balancer";
-import NoteContext from "@/lib/note-context";
 import { Menu } from "./dropdown-menu";
 import NavContext from "@/lib/context";
 
@@ -14,16 +13,25 @@ const NoteItem = ({ note }: { note: Note }) => {
   const [IsSelected, setIsSelected] = useState<boolean>();
   const date = new Date(CreatedAt as string).toDateString();
   const router = useRouter();
-  const { selectedNotes } = useContext(NavContext);
-
+  const { selectedNotes, setSelectedNotes } = useContext(NavContext);
+  useEffect(() => {
+    if (IsSelected) {
+      setSelectedNotes(selectedNotes?.concat(note) as Note[]);
+    } else {
+      const filteredSelectedNotes = selectedNotes?.filter(
+        (a) => a.ID !== note.ID
+      );
+      setSelectedNotes(filteredSelectedNotes as Note[]);
+    }
+  }, [IsSelected]);
   return (
     <article
       onDoubleClick={() => {
         setIsSelected(!IsSelected);
       }}
-      className={` select-none ${
-        IsSelected && "outline dark:outline-blue-700"
-      } w-full min-h-[300px] px-4 py-3 gap-3 flex flex-col items-center justify-between rounded-2xl border dark:border-dark-btn`}
+      className={` ${
+        IsSelected && " dark:border-blue-800 "
+      } select-none w-full min-h-[300px] px-4 py-3 gap-3 flex flex-col items-center justify-between rounded-2xl border dark:border-dark-btn`}
     >
       <Toaster
         toastOptions={{ className: "dark:bg-dark dark:text-white shadow-md" }}

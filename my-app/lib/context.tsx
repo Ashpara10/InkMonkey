@@ -11,23 +11,26 @@ import { Note } from "./types";
 const NavContext = createContext<{
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  setSelectedNotes: Dispatch<SetStateAction<Note[]>>;
   selectedNotes: Note[] | null;
 }>({
   open: false,
   setOpen: () => null,
   selectedNotes: null,
+  setSelectedNotes: () => null,
 });
 export default NavContext;
 
 export const ContextProviders = ({ children }: { children: ReactNode }) => {
   const [show, setShow] = useState(false);
-  let selectedArr: Note[] = [];
+  const [selected, setSelected] = useState<Note[]>([]);
   return (
     <NavContext.Provider
       value={{
         open: show,
         setOpen: setShow,
-        selectedNotes: selectedArr,
+        selectedNotes: selected,
+        setSelectedNotes: setSelected,
       }}
     >
       {children}

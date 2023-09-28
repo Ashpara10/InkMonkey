@@ -2,15 +2,12 @@
 import { HandleUpdateNote } from "@/lib/actions";
 import { Note } from "@/lib/types";
 import { useRouter } from "next/navigation";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import { VscArrowLeft, VscLoading } from "react-icons/vsc";
 import TextAreaAutoSize from "react-textarea-autosize";
-import NoteContext from "@/lib/note-context";
 
 const NotePage = ({ data }: { data: null | Note; status?: boolean }) => {
-  const { note } = useContext(NoteContext);
-  console.log({ notepagecontext: note });
   const router = useRouter();
   const [updatedNote, setUpdatedNote] = useState<Note>({
     Title: data?.Title as string,

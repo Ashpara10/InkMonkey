@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import useUser from "@/lib/useUser";
 import { deleteCookie, getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Sidebar = ({ open }: { open: boolean }) => {
   const userId = getCookie("user");
@@ -31,10 +32,9 @@ const Sidebar = ({ open }: { open: boolean }) => {
     >
       <div className=" flex h-screen flex-col items-center justify-between  w-full p-4">
         <div className="flex gap-x-3 items-center justify-between">
-          <div className="w-12 h-12 rounded-full bg-white">.</div>
           <div className="flex flex-col items-center justify-start">
             <span className="text-left w-full text-lg font-bold">
-              {data?.Email.split("@")[0].toUpperCase()}
+              {data?.Username}
             </span>
             <span className="text-sm opacity-80">{data?.Email}</span>
           </div>

@@ -1,12 +1,14 @@
 "use client";
 import React, { useContext, useEffect } from "react";
 import Logo from "./logo";
-import { Menu, XIcon } from "lucide-react";
+import { Menu, Trash2, XIcon } from "lucide-react";
 import NavContext from "@/lib/context";
 
 const Header = () => {
   const { open, setOpen, selectedNotes } = useContext(NavContext);
-
+  useEffect(() => {
+    console.log(selectedNotes);
+  }, [selectedNotes]);
   return (
     <header className="w-full static top-0 border-b px-4 py-1.5 dark:border-dark-btn flex items-center justify-between">
       <div className="flex items-center justify-center">
@@ -16,8 +18,8 @@ const Header = () => {
       <div className="flex gap-x-4 items-center justify-between">
         <div className="px-3">
           {selectedNotes?.length !== 0 && (
-            <button className=" flex items-center justify-center gap-x-2 dark:text-black dark:bg-white rounded-xl px-3 py-1">
-              Delete Notes({selectedNotes?.length})
+            <button className=" flex items-center justify-center gap-x-2 dark:text-black dark:bg-red-400 rounded-md px-3 py-1">
+              <Trash2 /> ({selectedNotes?.length})
             </button>
           )}
         </div>

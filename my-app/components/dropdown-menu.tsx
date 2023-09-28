@@ -1,20 +1,16 @@
 "use client";
 
 import * as React from "react";
-
 import {
   DropdownMenu,
   DropdownMenuItem,
   DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Trash, Download, Share2 } from "lucide-react";
 import { HandleDeleteNote } from "@/lib/actions";
 import toast, { Toaster } from "react-hot-toast";
 import { Note } from "@/lib/types";
-import NoteContext from "@/lib/note-context";
 
 export function Menu({
   children,
@@ -25,7 +21,6 @@ export function Menu({
   notes?: Note[];
   Id: string;
 }) {
-  const { note, setNote } = React.useContext(NoteContext);
   return (
     <DropdownMenu>
       <Toaster
@@ -37,11 +32,6 @@ export function Menu({
         <DropdownMenuItem
           onClick={async () => {
             const { data, status } = await HandleDeleteNote(Id as string);
-            const filteredArray = note?.filter((e) => {
-              return e.ID !== Id;
-            });
-            console.log(filteredArray);
-            setNote(filteredArray as Note[]);
             status && toast.success("Note successfully deleted");
           }}
           className="dark:hover:dark:bg-red-500 rounded-lg w-full"
