@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .form-input {
-  @apply focus-visible:outline-none px-2.5 py-1.5 bg-transparent  rounded-md w-full border dark:border-dark-btn border-gray-300;
+  @apply text-lg focus-visible:outline-none px-2.5 py-2 bg-transparent  rounded-lg w-full border dark:border-dark-btn border-gray-300;
 }

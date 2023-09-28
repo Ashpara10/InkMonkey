@@ -2,11 +2,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import useUser from "@/lib/useUser";
-import { getCookie } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 const Sidebar = ({ open }: { open: boolean }) => {
   const userId = getCookie("user");
   const { data, loading } = useUser(userId as string);
+  const router = useRouter();
   return (
     <motion.aside
       className="border-r dark:bg-dark z-10 absolute md:sticky top-0 dark:border-dark-btn overflow-hidden flex items-start justify-center  h-screen"
@@ -20,8 +22,14 @@ const Sidebar = ({ open }: { open: boolean }) => {
           type: "easeInOut",
         },
       }}
+      exit={{
+        opacity: Number(!open && 0.3),
+        transition: {
+          delay: 0.5,
+        },
+      }}
     >
-      <div className=" flex items-center justify-start  w-full p-4">
+      <div className=" flex h-screen flex-col items-center justify-between  w-full p-4">
         <div className="flex gap-x-3 items-center justify-between">
           <div className="w-12 h-12 rounded-full bg-white">.</div>
           <div className="flex flex-col items-center justify-start">
@@ -31,6 +39,15 @@ const Sidebar = ({ open }: { open: boolean }) => {
             <span className="text-sm opacity-80">{data?.Email}</span>
           </div>
         </div>
+        <button
+          onClick={async () => {
+            deleteCookie("user");
+            deleteCookie("token");
+            router.refresh();
+          }}
+        >
+          Logout
+        </button>
       </div>
     </motion.aside>
   );
