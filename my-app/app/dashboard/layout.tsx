@@ -13,7 +13,7 @@ export default function RootLayout({
   return (
     <div className="flex h-screen w-full">
       <Sidebar open={open} />
-      <main className="w-full flex flex-col flex-grow max-h-screen overflow-y-scroll">
+      <main className="w-full flex flex-col flex-grow min-h-screen  overflow-y-scroll">
         <Header />
         {children}
       </main>

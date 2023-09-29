@@ -54,7 +54,7 @@ const NotePage = ({ data }: { data: null | Note; status?: boolean }) => {
           )}
         </button>
       </div>
-      <article className="max-w-4xl w-full min-h-screen rounded-2xl border mt-10  px-4 py-16  dark:border-dark-btn">
+      <article className="max-w-4xl w-full min-h-screen rounded-2xl border mt-10   px-4 py-16  dark:border-dark-btn">
         <TextAreaAutoSize
           autoFocus
           placeholder="Title goes here..."

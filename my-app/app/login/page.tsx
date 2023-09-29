@@ -7,14 +7,14 @@ const Page = () => {
   const [type, setType] = useState<"login" | "register">();
   return (
     <div className="w-full h-screen flex items-center justify-center">
-      <div className="w-full hidden md:flex overflow-hidden h-screen ">
-        <Image
+      <div className="w-full hidden md:flex dark:bg-dark-btn overflow-hidden h-screen ">
+        {/* <Image
           alt=""
           src={"/login2.jpg"}
           width={1000}
           height={1000}
-          className="aspect-square"
-        />
+          // className="aspect-square rounded-3xl p-2"
+        /> */}
       </div>
       <div className="max-w-xl w-full h-screen flex flex-col items-center justify-center">
         <AuthForm type={type === "login" ? "login" : "register"} />

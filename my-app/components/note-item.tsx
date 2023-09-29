@@ -30,7 +30,7 @@ const NoteItem = ({ note }: { note: Note }) => {
         setIsSelected(!IsSelected);
       }}
       className={` ${
-        IsSelected && " outline dark:outline-blue-800 "
+        IsSelected && " outline dark:outline-blue-800/60 "
       } select-none w-full min-h-[300px] px-4 py-3 gap-3 flex flex-col items-center justify-between rounded-2xl border dark:border-dark-btn`}
     >
       <Toaster

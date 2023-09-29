@@ -32,7 +32,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
         </span>
       </div>
       <form
-        className=" w-full px-6  pt-4 flex flex-col gap-y-4 items-center justify-center"
+        className=" w-full px-6  pt-4 flex flex-col  items-center justify-center"
         onSubmit={async (event) => {
           event.preventDefault();
           setIsLoading(true);
@@ -74,19 +74,34 @@ const AuthForm = ({ type }: AuthFormProps) => {
         }}
       >
         {type === "register" && (
-          <input
-            placeholder="Username"
-            className="form-input"
-            name="Username"
-            type="text"
-            value={user?.Username}
-            onChange={(e) =>
-              setUser({ ...user, [e.target.name]: e.target.value })
-            }
-          />
+          <>
+            <label
+              className="w-full px-0.5 text-left mt-3 mb-1 font-medium"
+              htmlFor="username"
+            >
+              Username
+            </label>
+            <input
+              id="username"
+              className="form-input"
+              name="Username"
+              type="text"
+              value={user?.Username}
+              onChange={(e) =>
+                setUser({ ...user, [e.target.name]: e.target.value })
+              }
+            />
+          </>
         )}
+        <label
+          className="w-full px-0.5 text-left mt-3 mb-1 font-medium"
+          htmlFor="email"
+        >
+          Email Address
+        </label>
+
         <input
-          placeholder="Enter your email address"
+          id="email"
           className="form-input"
           name="Email"
           type="email"
@@ -95,9 +110,15 @@ const AuthForm = ({ type }: AuthFormProps) => {
             setUser({ ...user, [e.target.name]: e.target.value })
           }
         />
+        <label
+          className="w-full px-0.5 mt-3 mb-1 text-left font-medium"
+          htmlFor="password"
+        >
+          Password
+        </label>
 
         <input
-          placeholder="Enter password"
+          id="password"
           className="form-input"
           name="Password"
           type="password"
@@ -107,7 +128,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
           }
         />
         <button
-          className="bg-indigo-600 text-lg text-white w-full rounded-lg px-2.5 py-2"
+          className="bg-indigo-600 mt-3 text-lg text-white w-full rounded-lg px-2.5 py-2"
           disabled={isLoading}
           type="submit"
         >
