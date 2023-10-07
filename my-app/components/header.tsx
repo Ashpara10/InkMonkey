@@ -16,7 +16,7 @@ const Header = () => {
     setMounted(true);
   }, []);
   return (
-    <header className="w-full static top-0 border-b px-4 py-1.5 dark:border-dark-btn flex items-center justify-between">
+    <header className="w-full static z-10 top-0 border-b px-4 py-1.5 bg-white dark:bg-dark dark:border-dark-btn flex items-center justify-between">
       <div className="flex items-center justify-center">
         <Logo />
       </div>

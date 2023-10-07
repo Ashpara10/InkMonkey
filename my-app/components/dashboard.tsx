@@ -5,12 +5,16 @@ import NoteItem from "./note-item";
 import { create_note } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { Loader2, Loader2Icon, Plus, PlusIcon } from "lucide-react";
+import { Loader2, Plus } from "lucide-react";
+
+function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 const Dashboard = ({ notes }: { notes: Note[] }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const sortedArr = notes?.sort((a, b) => Number(b.ID) - Number(a.ID));
+
   return (
     <div className="w-full  my-10 px-4 flex flex-col items-center justify-center">
       <div className=" w-full px-2  mb-4 flex  items-center justify-center">
@@ -37,17 +41,18 @@ const Dashboard = ({ notes }: { notes: Note[] }) => {
           New
         </button>
       </div>
-      {sortedArr?.length === 0 ? (
+      {notes?.length === 0 && (
         <div className="w-full h-[80vh] border dark:border-dark-btn rounded-3xl flex items-center justify-center m-3">
           No notes
         </div>
-      ) : (
-        <section className=" w-full gap-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-          {sortedArr?.map((data) => {
+      )}
+      <section className=" w-full gap-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+        {notes
+          ?.sort((a, b) => Number(b.ID) - Number(a.ID))
+          ?.map((data) => {
             return <NoteItem key={data?.ID} note={data} />;
           })}
-        </section>
-      )}
+      </section>
     </div>
   );
 };

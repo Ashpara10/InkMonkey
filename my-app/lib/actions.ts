@@ -36,9 +36,10 @@ export const getNotes = async (
       "Content-Type": "application/json",
       "Auth-Token": String(token),
     },
-    next: {
-      revalidate: 5,
-    },
+    // next: {
+    //   revalidate: 5,
+    // },
+    cache: "no-cache",
   });
   const resp = await res.json();
   return { notes: resp?.data };
