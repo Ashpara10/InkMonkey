@@ -30,8 +30,8 @@ const NoteItem = ({ note }: { note: Note }) => {
         setIsSelected(!IsSelected);
       }}
       className={` ${
-        IsSelected && " outline dark:outline-blue-800/60 "
-      } select-none w-full min-h-[300px] px-4 py-3 gap-3 flex flex-col items-center justify-between rounded-2xl border dark:border-dark-btn`}
+        IsSelected && " outline-dashed dark:outline-purple-400 "
+      } select-none w-full min-h-[300px] px-4 py-3 gap-3 flex flex-col items-center justify-between rounded-2xl border dark:border-dark-btn bg-white dark:bg-dark`}
     >
       <Toaster
         toastOptions={{ className: "dark:bg-dark dark:text-white shadow-md" }}
@@ -47,7 +47,7 @@ const NoteItem = ({ note }: { note: Note }) => {
         </div>
 
         <h2
-          className="w-full text-left text-2xl font-bold"
+          className="w-full opacity-90 text-left text-2xl font-bold"
           onClick={() => router.push(`/dashboard/note/${UserId}/${ID}`)}
         >
           <Balancer>{Title}</Balancer>

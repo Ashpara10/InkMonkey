@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body
-        className={`${inter.className} min-h-screen flex flex-col w-full dark:bg-[#202020] bg-gray-50`}
+        className={`${inter.className} min-h-screen flex flex-col w-full dark:bg-[#202020] bg-gray-100/80`}
       >
         <Provider>
           <main className=" w-full flex flex-col items-center justify-center ">

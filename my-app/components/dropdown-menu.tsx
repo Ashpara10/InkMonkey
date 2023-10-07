@@ -34,7 +34,7 @@ export function Menu({
             const { data, status } = await HandleDeleteNote(Id as string);
             status && toast.success("Note successfully deleted");
           }}
-          className="dark:hover:dark:bg-red-500 rounded-lg w-full"
+          className=" hover:bg-red-400 hover:text-white dark:hover:bg-red-500 rounded-lg w-full"
         >
           <Trash className="mr-2" /> Delete
         </DropdownMenuItem>

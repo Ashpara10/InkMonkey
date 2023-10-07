@@ -3,16 +3,34 @@ import React from "react";
 import { motion } from "framer-motion";
 import useUser from "@/lib/useUser";
 import { deleteCookie, getCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
+import { Home, LayoutDashboard, LayoutGrid, User } from "lucide-react";
 
 const Sidebar = ({ open }: { open: boolean }) => {
   const userId = getCookie("user");
   const { data, loading } = useUser(userId as string);
   const router = useRouter();
+  const currentPath = usePathname();
+
+  const routes = {
+    "/": {
+      name: "Home",
+      icon: <Home />,
+    },
+    "/profile": {
+      name: "Account",
+      icon: <User />,
+    },
+    "/dashboard": {
+      name: "Dashboard",
+      icon: <LayoutGrid />,
+    },
+  };
+
   return (
     <motion.aside
-      className="border-r dark:bg-dark z-10 absolute md:sticky top-0 dark:border-dark-btn overflow-hidden flex items-start justify-center  h-screen"
+      className="border-r bg-white dark:bg-dark z-10 absolute md:sticky top-0 dark:border-dark-btn overflow-hidden flex items-start justify-center  h-screen"
       initial={{
         width: 0,
       }}
@@ -30,25 +48,24 @@ const Sidebar = ({ open }: { open: boolean }) => {
         },
       }}
     >
-      <div className=" flex h-screen flex-col items-center justify-between  w-full p-4">
-        <div className="flex gap-x-3 items-center justify-between">
-          <div className="flex flex-col items-center justify-start">
-            <span className="text-left w-full text-lg font-bold">
-              {data?.Username}
-            </span>
-            <span className="text-sm opacity-80">{data?.Email}</span>
-          </div>
-        </div>
-        <button
-          onClick={async () => {
-            deleteCookie("user");
-            deleteCookie("token");
-            router.refresh();
-          }}
-        >
-          Logout
-        </button>
-      </div>
+      <ul className="w-full mt-4 px-4 flex flex-col items-center justify-start gap-y-2">
+        {Object.entries(routes).map(([path, { name, icon }]) => {
+          const isActive = path === currentPath;
+
+          return (
+            <li
+              className={`w-full opacity-95 px-3 py-1.5 flex items-center justify-start gap-x-2 ${
+                isActive && "rounded-lg  dark:bg-dark-btn bg-gray-200"
+              }`}
+              key={path}
+              onClick={() => router.push(path)}
+            >
+              {icon}
+              {name}
+            </li>
+          );
+        })}
+      </ul>
     </motion.aside>
   );
 };

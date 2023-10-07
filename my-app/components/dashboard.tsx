@@ -12,7 +12,7 @@ const Dashboard = ({ notes }: { notes: Note[] }) => {
   const [loading, setLoading] = useState(false);
   const sortedArr = notes?.sort((a, b) => Number(b.ID) - Number(a.ID));
   return (
-    <div className="w-full my-10 px-4 flex flex-col items-center justify-center">
+    <div className="w-full  my-10 px-4 flex flex-col items-center justify-center">
       <div className=" w-full px-2  mb-4 flex  items-center justify-center">
         <span className="text-4xl w-full text-left font-bold">Dashboard</span>
 
