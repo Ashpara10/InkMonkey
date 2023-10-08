@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Theme from "../lib/theme";
 import { Provider } from "react-wrap-balancer";
+import LandingHeader from "@/components/landing/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,8 @@ export default function RootLayout({
         className={`${inter.className} min-h-screen flex flex-col w-full dark:bg-[#202020] bg-gray-100/80`}
       >
         <Provider>
-          <main className=" w-full flex flex-col items-center justify-center ">
+          {/* <LandingHeader /> */}
+          <main className=" w-full  flex flex-col items-center justify-center ">
             <Theme>{children}</Theme>
           </main>
         </Provider>

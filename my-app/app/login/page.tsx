@@ -8,13 +8,13 @@ const Page = () => {
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <div className="w-full hidden md:flex dark:bg-dark-btn overflow-hidden h-screen ">
-        {/* <Image
+        <Image
           alt=""
-          src={"/login2.jpg"}
+          src={"/auth.svg"}
           width={1000}
           height={1000}
           // className="aspect-square rounded-3xl p-2"
-        /> */}
+        />
       </div>
       <div className="max-w-xl w-full h-screen flex flex-col items-center justify-center">
         <AuthForm type={type === "login" ? "login" : "register"} />

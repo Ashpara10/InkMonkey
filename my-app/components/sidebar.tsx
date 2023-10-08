@@ -30,7 +30,7 @@ const Sidebar = ({ open }: { open: boolean }) => {
 
   return (
     <motion.aside
-      className="border-r bg-white dark:bg-dark z-10 absolute md:sticky top-0 dark:border-dark-btn overflow-hidden flex items-start justify-center  h-screen"
+      className="border-r bg-white dark:bg-dark z-10 absolute z-20 md:sticky top-0 dark:border-dark-btn overflow-hidden flex items-start justify-center  h-screen"
       initial={{
         width: 0,
       }}
