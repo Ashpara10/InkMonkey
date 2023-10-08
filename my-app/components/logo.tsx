@@ -11,7 +11,7 @@ const Logo = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect width="50" height="50" rx="15" fill="#ae00ff" />
+      <rect width="50" height="50" rx="15" fill="#7b03cc" />
       <path
         d="M40 25C40 33.2843 33.2843 40 25 40C16.7157 40 10 33.2843 10 25C10 16.7157 16.7157 10 25 10C33.2843 10 40 16.7157 40 25Z"
         fill="white"

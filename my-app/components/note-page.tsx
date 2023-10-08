@@ -33,14 +33,14 @@ const NotePage = ({ data }: { data: null | Note; status?: boolean }) => {
       <div className="max-w-4xl w-full flex items-center justify-between ">
         <button
           onClick={() => router.back()}
-          className="flex gap-x-2 items-center justify-center text-lg border dark:hover:bg-dark-btn dark:border-dark-btn text-white px-4 py-2 rounded-lg"
+          className="flex gap-x-2 items-center justify-center text-black text-lg border dark:hover:bg-dark-btn dark:border-dark-btn dark:text-white px-4 py-2 rounded-lg"
         >
           <VscArrowLeft className="text-lg font-bold " />
           Back
         </button>
 
         <button
-          className="flex items-center justify-center text-lg dark:bg-white text-black px-4 py-2 rounded-lg disabled:opacity-70"
+          className="flex items-center justify-center border border-gray-200 dark:border-dark-btn bg-white  text-lg dark:bg-white text-black px-4 py-2 rounded-lg disabled:opacity-70"
           disabled={data?.Title === updatedNote?.Title}
           onClick={() => updateNote(data?.ID as string)}
         >
@@ -54,7 +54,7 @@ const NotePage = ({ data }: { data: null | Note; status?: boolean }) => {
           )}
         </button>
       </div>
-      <article className="max-w-4xl w-full min-h-screen rounded-2xl border mt-10   px-4 py-16  dark:border-dark-btn">
+      <article className="max-w-4xl w-full min-h-screen rounded-2xl border mt-10 border-gray-200 bg-white dark:bg-dark  px-4 py-16  dark:border-dark-btn">
         <TextAreaAutoSize
           autoFocus
           placeholder="Title goes here..."
