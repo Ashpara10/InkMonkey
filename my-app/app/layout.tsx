@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body
-        className={`${inter.className} min-h-screen flex flex-col w-full dark:bg-[#202020] bg-gray-100`}
+        className={`${inter.className} min-h-screen flex flex-col w-full dark:bg-dark bg-gray-100`}
       >
         <Provider>
           {/* <LandingHeader /> */}

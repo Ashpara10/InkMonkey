@@ -4,7 +4,7 @@ import React from "react";
 const HomeSection = () => {
   return (
     <section className="max-w-4xl h-[70vh] w-full mt-16 flex flex-col gap-3 items-center justify-center">
-      <span className="rounded-3xl flex items-center justify-center gap-x-2 px-4 py-2 mb-2 dark:bg-dark-btn bg-gray-200 ">
+      <span className="rounded-3xl flex items-center justify-center gap-x-2 px-5 py-2 mb-2 borde dark:border-noner border-gray-300 dark:bg-dark-btn bg-gray-200 ">
         <Twitter className="text-lg font-bold" /> Follow along on twitter
       </span>
       <h2 className="w-full  text-4xl md:text-6xl text-center font-bold">
@@ -20,14 +20,14 @@ const HomeSection = () => {
         students
       </p>
       <div className="w-full px-8 mt-2 flex items-center justify-center">
-        <button className="px-6 py-3 text-lg mx-4 rounded-3xl flex items-center justify-center  gap-x-2  bg-[#7b03cc]  ">
+        <button className="px-6 py-3 md:text-lg mx-4 rounded-3xl flex items-center justify-center  gap-x-2  bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-200 via-violet-600 to-sky-900   text-white">
           Get Started{" "}
-          <ArrowRight className="text-lg font-bold group-hover:visible" />
+          <ArrowRight className="hidden md:flex font-bold group-hover:visible" />
         </button>
-        <button className="px-6 py-3 text-lg mx-4 rounded-3xl   flex items-center justify-center gap-x-2 dark:bg-dark-btn">
+        <button className="px-6 py-3 md:text-lg mx-4 rounded-3xl  bg-gray-200 border border-gray-300 dark:border-none flex items-center justify-center gap-x-2 dark:bg-dark-btn">
           {" "}
           Github
-          <Github className="text-lg font-bold" />
+          <Github className=" font-bold" />
         </button>
       </div>
     </section>
