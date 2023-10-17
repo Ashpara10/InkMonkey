@@ -2,11 +2,10 @@ import { getCookie } from "cookies-next";
 import { Note } from "./types";
 import basepath from "./path";
 
-export const create_note = async (
-  note: Note
-): Promise<{ note: Note; status: boolean }> => {
-  const userId = getCookie("user");
-  const token = getCookie("token");
+const userId = getCookie("user");
+const token = getCookie("token");
+
+export const createNote = async () => {
   const res = await fetch(`${basepath}/api/v1/note/${userId}/createnote`, {
     method: "POST",
     headers: {
@@ -14,24 +13,19 @@ export const create_note = async (
       "Auth-Token": String(token),
     },
     body: JSON.stringify({
-      title: note?.Title,
-      content: note?.Content,
-      tags: note?.Tags,
+      title: "Untitled Note....",
+      content: "Content goes here",
+      tags: "General",
       userid: userId,
     }),
   });
   const data = await res.json();
-  return {
-    status: res.ok,
-    note: data?.data as Note,
-  };
+  console.log(data);
+  return data?.data;
 };
 
-export const getNotes = async (
-  id: string,
-  token: string
-): Promise<{ notes: Note[] }> => {
-  const res = await fetch(`${basepath}/api/v1/note/${id}/getnotes`, {
+export const getNotes = async (): Promise<Note[]> => {
+  const res = await fetch(`${basepath}/api/v1/note/${userId}/getnotes`, {
     headers: {
       "Content-Type": "application/json",
       "Auth-Token": String(token),
@@ -39,10 +33,10 @@ export const getNotes = async (
     // next: {
     //   revalidate: 5,
     // },
-    cache: "no-cache",
+    // cache: "no-cache",
   });
   const resp = await res.json();
-  return { notes: resp?.data };
+  return resp?.data as Note[];
 };
 
 export const GetNoteByID = async (

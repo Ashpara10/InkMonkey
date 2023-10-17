@@ -1,17 +1,14 @@
+"use client";
 import Dashboard from "@/components/dashboard";
 import { getNotes } from "@/lib/actions";
+import { Note } from "@/lib/types";
+import { getCookie } from "cookies-next";
 import { cookies } from "next/headers";
+import { useQuery } from "react-query";
 
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-const Page = async () => {
-  const user = cookies().get("user")?.value as string;
-  const token = cookies().get("token")?.value as string;
-
-  const { notes } = await getNotes(user, token);
-  return <Dashboard notes={notes} />;
+const Page = () => {
+  const { data } = useQuery("notes", getNotes);
+  return <Dashboard notes={data as Note[]} />;
 };
 
 export default Page;

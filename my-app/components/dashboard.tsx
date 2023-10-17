@@ -2,10 +2,12 @@
 import { Note } from "@/lib/types";
 import React, { useState } from "react";
 import NoteItem from "./note-item";
-import { create_note } from "@/lib/actions";
+import { createNote } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { Loader2, Plus } from "lucide-react";
+import { useMutation } from "react-query";
+import { queryClient } from "@/lib/theme";
 
 function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -13,7 +15,14 @@ function delay(ms: number) {
 
 const Dashboard = ({ notes }: { notes: Note[] }) => {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const { data, isSuccess, mutate, isLoading } = useMutation(createNote, {
+    onSuccess: () => {
+      console.log({ new: data });
+      queryClient.refetchQueries("notes");
+      toast.success("Note successfully created");
+      router.push(`/dashboard/note/${data?.UserId}/${data?.ID}`);
+    },
+  });
 
   return (
     <div className="w-full  my-10 px-4 flex flex-col items-center justify-center">
@@ -21,23 +30,10 @@ const Dashboard = ({ notes }: { notes: Note[] }) => {
         <span className="text-4xl w-full text-left font-bold">Dashboard</span>
 
         <button
-          onClick={async () => {
-            setLoading(true);
-            const { note: newNote, status } = await create_note({
-              Title: "Untitled....",
-              Content: "Content goes here",
-              Tags: "General",
-            });
-            if (status) {
-              setLoading(false);
-              toast.success("Note successfully created");
-              router.refresh();
-              router.push(`/dashboard/note/${newNote?.UserId}/${newNote?.ID}`);
-            }
-          }}
+          onClick={() => mutate()}
           className="text-lg flex items-center justify-center gap-x-2 dark:text-black dark:bg-white rounded-xl px-4 py-2"
         >
-          {loading ? <Loader2 className="animate-spin" /> : <Plus />}
+          {isLoading ? <Loader2 className="animate-spin" /> : <Plus />}
           New
         </button>
       </div>
