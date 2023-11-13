@@ -1,30 +1,30 @@
-import { ArrowRight, Github, Twitter } from "lucide-react";
+import { ArrowRight, ChevronRight, Github, Twitter } from "lucide-react";
 import React from "react";
+import Balancer from "react-wrap-balancer";
 
 const HomeSection = () => {
   return (
-    <section className="max-w-4xl h-[70vh] w-full mt-16 flex flex-col gap-3 items-center justify-start">
+    <section className="max-w-4xl px-4  w-full mt-16 flex flex-col gap-3 items-center justify-start">
       <span className="rounded-3xl flex items-center justify-center gap-x-2 px-5 py-2 mb-2 borde dark:border-noner border-gray-300 dark:bg-dark-btn bg-gray-200 ">
         <Twitter className="text-lg font-bold" /> Follow along on twitter
       </span>
-      <h2 className="w-full  text-3xl sm:text-5xl md:text-6xl  text-center font-bold">
-        <span className="text-transparent bg-clip-text bg-gradient-to-l  from-purple-600 via-indigo-500 to-blue-700  ">
-          {" "}
-          Modern & Minimal{" "}
-        </span>{" "}
-        Note
-        <br className="hidden md:flex" /> taking and Journaling tool
+      <h2 className="  text-3xl sm:text-3xl lg:text-6xl  text-center font-bold">
+        <Balancer ratio={0.75}>
+          Modern & Minimal <br className="hidden md:flex" />
+          Note taking and productivity tool 🐵✏️
+        </Balancer>
       </h2>
-      <p className="text-xl max-w-xl opacity-80 text-center ">
-        A note taking and journaling app the that catters towards the needs of
-        students
+      <p className="sm:text-xl opacity-80 text-center ">
+        <Balancer>
+          The minimal note-taking app for focused thinking and rapid insights.
+        </Balancer>
       </p>
       <div className="w-full px-8 mt-2 flex items-center justify-center">
-        <button className="px-6 py-3 md:text-lg mx-4 rounded-3xl flex items-center justify-center  gap-x-2  bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))]  from-amber-200 via-violet-600 to-sky-900   text-white">
+        <button className="px-6 py-3 md:text-lg mx-4 rounded-3xl flex items-center justify-center  gap-x-2 group  bg-indigo-700  text-white">
           Get Started{" "}
-          <ArrowRight className="hidden md:flex font-bold group-hover:visible" />
+          <ChevronRight className="hidden md:flex font-bold group-hover:rotate-2" />
         </button>
-        <button className="px-6 py-3 md:text-lg mx-4 rounded-3xl  bg-gray-200 border border-gray-300 dark:border-none flex items-center justify-center gap-x-2 dark:bg-dark-btn">
+        <button className="px-6 py-3 md:text-lg mx-4 rounded-3xl   flex items-center justify-center gap-x-2 bg-black text-white dark:text-black dark:bg-white">
           {" "}
           Github
           <Github className=" font-bold" />

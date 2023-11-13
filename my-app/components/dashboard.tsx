@@ -13,9 +13,9 @@ function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-const Dashboard = ({ notes }: { notes: Note[] }) => {
+const Dashboard = ({ notes, loading }: { notes: Note[]; loading: boolean }) => {
   const router = useRouter();
-  const { data, isSuccess, mutate, isLoading } = useMutation(createNote, {
+  const { data, mutate, isLoading } = useMutation(createNote, {
     onSuccess: () => {
       console.log({ new: data });
       queryClient.refetchQueries("notes");
@@ -43,11 +43,20 @@ const Dashboard = ({ notes }: { notes: Note[] }) => {
         </div>
       )}
       <section className=" w-full gap-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        {notes
-          ?.sort((a, b) => Number(b.ID) - Number(a.ID))
-          ?.map((data) => {
-            return <NoteItem key={data?.ID} note={data} />;
-          })}
+        {loading
+          ? [...Array(12)].map((_, i) => {
+              return (
+                <div
+                  className=" rounded-lg h-[300px] bg-gray-200 text-transparent dark:bg-dark-btn animate-pulse"
+                  key={i}
+                />
+              );
+            })
+          : notes
+              ?.sort((a, b) => Number(b.ID) - Number(a.ID))
+              ?.map((data) => {
+                return <NoteItem key={data?.ID} note={data} />;
+              })}
       </section>
     </div>
   );

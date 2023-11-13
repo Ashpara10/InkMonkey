@@ -5,7 +5,7 @@ import useUser from "@/lib/useUser";
 import { deleteCookie, getCookie } from "cookies-next";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-import { Home, LayoutDashboard, LayoutGrid, User } from "lucide-react";
+import { Home, LayoutDashboard, LayoutGrid, LogOut, User } from "lucide-react";
 
 const Sidebar = ({ open }: { open: boolean }) => {
   const userId = getCookie("user");
@@ -30,7 +30,7 @@ const Sidebar = ({ open }: { open: boolean }) => {
 
   return (
     <motion.aside
-      className="border-r bg-white dark:bg-dark absolute z-20 md:sticky top-0 dark:border-dark-btn overflow-hidden flex items-start justify-center  h-screen"
+      className="border-r bg-gray-100 dark:bg-dark absolute z-20 md:sticky top-0 dark:border-dark-btn overflow-hidden flex flex-col items-center justify-between  h-screen"
       initial={{
         width: 0,
       }}
@@ -66,6 +66,17 @@ const Sidebar = ({ open }: { open: boolean }) => {
           );
         })}
       </ul>
+      <button
+        className="rounded-3xl w-full  flex mb-4 px-6 py-2  gap-x-2  "
+        onClick={() => {
+          deleteCookie("user");
+          deleteCookie("token");
+          router.refresh();
+        }}
+      >
+        <LogOut className="opacity-90" />
+        Logout
+      </button>
     </motion.aside>
   );
 };

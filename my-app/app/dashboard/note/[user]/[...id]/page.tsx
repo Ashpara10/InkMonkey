@@ -1,7 +1,6 @@
 import NotePage from "@/components/note-page";
 import basepath from "@/lib/path";
 import { Note } from "@/lib/types";
-import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 const getNoteByID = async (

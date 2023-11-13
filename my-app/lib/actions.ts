@@ -42,9 +42,7 @@ export const getNotes = async (): Promise<Note[]> => {
 export const GetNoteByID = async (
   id: string
 ): Promise<{ note: Note | null; status: boolean }> => {
-  const token = getCookie("token");
-  const userId = getCookie("user");
-  const res = await fetch(`${basepath}/api/v1/note/21/getnote/${id}`, {
+  const res = await fetch(`${basepath}/api/v1/note/${userId}/getnote/${id}`, {
     headers: {
       "Content-Type": "application/json",
       "Auth-Token": String(token),
@@ -58,8 +56,6 @@ export const GetNoteByID = async (
   return { status: true, note: resp?.data };
 };
 export const HandleUpdateNote = async (note: Note, ID: string) => {
-  const userId = getCookie("user");
-  const token = getCookie("token");
   const res = await fetch(`${basepath}/api/v1/note/${userId}/update/${ID}`, {
     method: "PUT",
     headers: {
@@ -83,8 +79,6 @@ export const HandleUpdateNote = async (note: Note, ID: string) => {
   };
 };
 export const HandleDeleteNote = async (ID: string) => {
-  const userId = getCookie("user");
-  const token = getCookie("token");
   const res = await fetch(`${basepath}/api/v1/note/${userId}/delete/${ID}`, {
     method: "DELETE",
     headers: {
@@ -95,7 +89,6 @@ export const HandleDeleteNote = async (ID: string) => {
   const data = await res.json();
   console.log(data);
   return {
-    status: res.ok,
     data: data,
   };
 };

@@ -55,7 +55,9 @@ const NoteItem = ({ note }: { note: Note }) => {
       </div>
       <div className="w-full flex items-center justify-between">
         <span>{date}</span>
-        <span className={`dark:bg-dark-btn rounded-3xl py-1 px-3`}>{Tags}</span>
+        <span className={`dark:bg-dark-btn bg-gray-100 rounded-3xl py-1 px-3`}>
+          {Tags}
+        </span>
       </div>
     </article>
   );
