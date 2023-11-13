@@ -20,11 +20,10 @@ const HomeSection = () => {
         </Balancer>
       </p>
       <div className="w-full px-8 mt-2 flex items-center justify-center">
-        <button className="px-6 py-3 md:text-lg mx-4 rounded-3xl flex items-center justify-center  gap-x-2 group  bg-indigo-700  text-white">
-          Get Started{" "}
-          <ChevronRight className="hidden md:flex font-bold group-hover:rotate-2" />
+        <button className="px-6 py-3 md:text-lg mx-4 rounded-3xl flex items-center justify-center  gap-x-2   bg-indigo-700  text-white">
+          Get Started <ChevronRight className=" font-bold " />
         </button>
-        <button className="px-6 py-3 md:text-lg mx-4 rounded-3xl   flex items-center justify-center gap-x-2 bg-black text-white dark:text-black dark:bg-white">
+        <button className="px-6 hidden  md:flex py-3 md:text-lg mx-4 rounded-3xl    items-center justify-center gap-x-2 bg-black text-white dark:text-black dark:bg-white">
           {" "}
           Github
           <Github className=" font-bold" />

@@ -30,10 +30,10 @@ const LandingHeader = () => {
           ) : (
             <button
               onClick={() => router.push("/login")}
-              className="rounded-3xl text-lg  flex items-center justify-center px-6 py-2   "
+              className="rounded-3xl text-lg gap-x-2 flex items-center justify-center px-6 py-2   "
             >
-              Sign up
-              <ChevronRight className="ml-2" />
+              Signup
+              <ChevronRight />
             </button>
           )}
         </div>
