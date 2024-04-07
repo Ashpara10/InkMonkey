@@ -1,27 +1,25 @@
-import { useEffect, useState } from "react";
+import { getCookie } from "cookies-next";
 import basepath from "./path";
-import { User } from "./types";
+import { useQuery } from "react-query";
 
-const useUser = (id: string) => {
-  const [user, setUser] = useState<User>();
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const getUserById = async () => {
-      setLoading(true);
-      const res = await fetch(`${basepath}/user/${id}`);
-      const data = await res.json();
-      if (res.ok) {
-        setLoading(false);
-        setUser(data?.user);
-      }
-    };
-    typeof id !== "undefined" && getUserById();
-  }, [id]);
+const useUser = () => {
+  const id = getCookie("user");
+  const { data, error, isLoading } = useQuery({
+    queryKey: "getUser",
+    queryFn: async () => {
+      const res = fetch(`${basepath}/user/${id}`)
+        .then((r) => r.json())
+        .then((data) => data)
+        .catch((err) => err);
+      return res;
+    },
+  });
+  console.log({ data });
 
   return {
-    data: user,
-    loading: loading,
+    data: data?.user,
+    loading: isLoading,
+    error: error,
   };
 };
 export default useUser;

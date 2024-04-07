@@ -22,6 +22,10 @@ type Note struct {
 	UserId  string
 }
 
+type NoteParam struct {
+	ID string
+}
+
 type UserResponse struct {
 	Token string `json:"token"`
 	User  *User  `json:"user"`

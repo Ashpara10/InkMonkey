@@ -59,6 +59,11 @@ const AuthForm = ({ type }: AuthFormProps) => {
             }
           );
           const data = await res.json();
+          if (!data?.token) {
+            setIsLoading(false);
+            toast.error(data?.error);
+            return;
+          }
           console.log(data);
           setCookie("token", data?.token);
           setCookie("user", data?.user?.ID);

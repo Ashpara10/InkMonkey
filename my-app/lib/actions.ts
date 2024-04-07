@@ -20,8 +20,8 @@ export const createNote = async () => {
     }),
   });
   const data = await res.json();
-  console.log(data);
-  return data?.data;
+  console.log({ data: data?.data?.ID });
+  return data?.data as Note;
 };
 
 export const getNotes = async (): Promise<Note[]> => {
@@ -30,30 +30,22 @@ export const getNotes = async (): Promise<Note[]> => {
       "Content-Type": "application/json",
       "Auth-Token": String(token),
     },
-    // next: {
-    //   revalidate: 5,
-    // },
-    // cache: "no-cache",
   });
   const resp = await res.json();
+
   return resp?.data as Note[];
 };
 
-export const GetNoteByID = async (
-  id: string
-): Promise<{ note: Note | null; status: boolean }> => {
+export const GetNoteByID = async (id: string) => {
   const res = await fetch(`${basepath}/api/v1/note/${userId}/getnote/${id}`, {
     headers: {
       "Content-Type": "application/json",
       "Auth-Token": String(token),
     },
-    cache: "no-cache",
   });
   const resp = await res.json();
-  if (!res.ok) {
-    return { status: false, note: null };
-  }
-  return { status: true, note: resp?.data };
+
+  return resp?.data;
 };
 export const HandleUpdateNote = async (note: Note, ID: string) => {
   const res = await fetch(`${basepath}/api/v1/note/${userId}/update/${ID}`, {

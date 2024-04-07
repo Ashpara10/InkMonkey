@@ -2,6 +2,7 @@ package server
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/Ashpara10/server/storage"
 	"github.com/Ashpara10/server/types"
@@ -132,6 +133,19 @@ func (s *ApiServer) Start() {
 	})
 	notes.Delete("/delete/:noteid", func(c *fiber.Ctx) error {
 		noteId := c.Params("noteId")
+		ids := strings.Split(noteId, ",")
+		if len(ids) > 0 {
+			var notesToDelete []t.NoteParam
+			// for i := 0; i < len(ids); i++ {
+			// 	append(notesToDelete, t.NoteParam{ID: ids[i]})
+			// }
+
+			err := s.store.DeleteNotes(notesToDelete)
+			if err != nil {
+				return c.Status(fiber.StatusBadRequest).JSON(&fiber.Map{"status": false, "err": err.Error()})
+			}
+		}
+		fmt.Println(len(ids))
 
 		err := s.store.DeleteNote(noteId)
 		if err != nil {
@@ -195,6 +209,7 @@ func (s *ApiServer) Start() {
 		if err != nil {
 			return err
 		}
+
 		return c.JSON(&t.UserResponse{
 			Token: token,
 			User:  user,
@@ -208,11 +223,19 @@ func (s *ApiServer) Start() {
 		}
 		u, err := s.store.GetUserByEmail(user.Email)
 		if err != nil {
-			return err
+			return ctx.JSON(map[string]string{
+				"msg":   "User not found",
+				"error": string(err.Error()),
+			})
+
 		}
 
 		if user.Password != u.Password {
-			return fmt.Errorf("Invalid Credentials:Login using correct password")
+			return ctx.JSON(map[string]string{
+
+				"error": "Invalid Credentials:Login using correct password",
+			})
+
 		}
 		token, err := t.CreateJwtAuthToken(u.ID)
 		if err != nil {

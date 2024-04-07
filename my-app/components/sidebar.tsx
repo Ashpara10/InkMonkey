@@ -6,10 +6,19 @@ import { deleteCookie, getCookie } from "cookies-next";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { Home, LayoutDashboard, LayoutGrid, LogOut, User } from "lucide-react";
+import Logo from "./logo";
+import { Note } from "@/lib/types";
+import NoteItem from "./note-item";
 
-const Sidebar = ({ open }: { open: boolean }) => {
-  const userId = getCookie("user");
-  const { data, loading } = useUser(userId as string);
+type NoteData = {
+  notes: Note[];
+  isLoading: boolean;
+  error: unknown;
+};
+
+const Sidebar = ({ open, notes }: { open: boolean; notes?: NoteData }) => {
+  const { data, loading } = useUser();
+  console.log({ data });
   const router = useRouter();
   const currentPath = usePathname();
 
@@ -18,7 +27,7 @@ const Sidebar = ({ open }: { open: boolean }) => {
       name: "Home",
       icon: <Home />,
     },
-    "/profile": {
+    "/dashboard/account": {
       name: "Account",
       icon: <User />,
     },
@@ -30,12 +39,12 @@ const Sidebar = ({ open }: { open: boolean }) => {
 
   return (
     <motion.aside
-      className="border-r bg-gray-100 dark:bg-dark absolute z-20 md:sticky top-0 dark:border-dark-btn overflow-hidden flex flex-col items-center justify-between  h-screen"
+      className="border-r bg-gray-100 dark:bg-dark absolute z-20 md:sticky top-0 dark:border-dark-btn overflow-hidden flex flex-col items-center justify-start  h-screen"
       initial={{
         width: 0,
       }}
       animate={{
-        width: Number(open && 280),
+        width: Number(open && 380),
         transition: {
           delay: 0.03,
           type: "easeInOut",
@@ -48,24 +57,13 @@ const Sidebar = ({ open }: { open: boolean }) => {
         },
       }}
     >
-      <ul className="w-full mt-4 px-4 flex flex-col items-center justify-start gap-y-2">
-        {Object.entries(routes).map(([path, { name, icon }]) => {
-          const isActive = path === currentPath;
-
-          return (
-            <li
-              className={`w-full opacity-95 px-3 py-1.5 flex items-center justify-start gap-x-2 ${
-                isActive && "rounded-lg  dark:bg-dark-btn bg-gray-200"
-              }`}
-              key={path}
-              onClick={() => router.push(path)}
-            >
-              {icon}
-              {name}
-            </li>
-          );
-        })}
-      </ul>
+      <div className="w-full flex items-center justify-start p-2">
+        <div className="bg-dark-btn w-10 h-10 rounded-full" />
+        <span className="flex items-center justify-center text-lg ml-2">
+          {loading ? "Loading..." : data?.Email}
+        </span>
+      </div>
+      <ul className="w-full mt-4   px-4 flex flex-col items-center justify-start gap-y-2"></ul>
       <button
         className="rounded-3xl w-full  flex mb-4 px-6 py-2  gap-x-2  "
         onClick={() => {

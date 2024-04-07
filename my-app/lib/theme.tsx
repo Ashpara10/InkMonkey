@@ -5,7 +5,13 @@ import React from "react";
 import { ContextProviders } from "./context";
 import { QueryClient, QueryClientProvider } from "react-query";
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnMount: false,
+    },
+  },
+});
 const Theme = ({ children }: { children: React.ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>

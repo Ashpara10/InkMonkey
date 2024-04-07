@@ -9,13 +9,9 @@ import {
 import { Note } from "./types";
 
 const NavContext = createContext<{
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
   setSelectedNotes: Dispatch<SetStateAction<Note[]>>;
   selectedNotes: Note[] | null;
 }>({
-  open: false,
-  setOpen: () => null,
   selectedNotes: null,
   setSelectedNotes: () => null,
 });
@@ -27,8 +23,6 @@ export const ContextProviders = ({ children }: { children: ReactNode }) => {
   return (
     <NavContext.Provider
       value={{
-        open: show,
-        setOpen: setShow,
         selectedNotes: selected,
         setSelectedNotes: setSelected,
       }}

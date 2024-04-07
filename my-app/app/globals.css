@@ -2,17 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
 .form-input {
   @apply  focus-visible:outline-none px-2.5 text-opacity-80 py-2 bg-transparent  rounded-lg w-full border dark:border-dark-btn border-gray-300;
 }
-.gradient{
-  background: hsla(307, 93%, 84%, 1);
 
-background: linear-gradient(90deg, hsla(307, 93%, 84%, 1) 0%, hsla(256, 96%, 44%, 1) 100%);
-
-background: -moz-linear-gradient(180deg, hsla(307, 93%, 84%, 1) 0%, hsla(256, 96%, 44%, 1) 100%);
-
-background: -webkit-linear-gradient(90deg, hsla(307, 93%, 84%, 1) 0%, hsla(256, 96%, 44%, 1) 100%);
-
-filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#fcb0f3", endColorstr="#3d05dd", GradientType=1 );
-}

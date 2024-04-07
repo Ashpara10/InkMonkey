@@ -3,7 +3,8 @@ import { Note } from "@/lib/types";
 import React, { useContext, useEffect, useState } from "react";
 import { MoreHorizontal } from "lucide-react";
 import { Toaster } from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter as useNavigation } from "next/navigation";
+import { useRouter } from "next/router";
 import { Balancer } from "react-wrap-balancer";
 import { Menu } from "./dropdown-menu";
 import NavContext from "@/lib/context";
@@ -12,7 +13,9 @@ const NoteItem = ({ note }: { note: Note }) => {
   const { ID, Title, Tags, CreatedAt, UserId } = note;
   const [IsSelected, setIsSelected] = useState<boolean>();
   const date = new Date(CreatedAt as string).toDateString();
-  const router = useRouter();
+
+  const router = useNavigation();
+
   const { selectedNotes, setSelectedNotes } = useContext(NavContext);
   useEffect(() => {
     if (IsSelected) {
@@ -31,7 +34,7 @@ const NoteItem = ({ note }: { note: Note }) => {
       }}
       className={` ${
         IsSelected && " outline-dashed dark:outline-purple-400 "
-      } select-none w-full min-h-[300px] px-4 py-3 gap-3 flex flex-col items-center justify-between rounded-2xl border dark:border-dark-btn bg-white dark:bg-dark`}
+      } select-none w-full min-h-[300px] px-4 py-3 gap-3 flex flex-col items-center justify-between rounded-3xl border dark:border-dark-btn bg-white dark:bg-dark`}
     >
       <Toaster
         toastOptions={{ className: "dark:bg-dark dark:text-white shadow-md" }}
@@ -48,7 +51,7 @@ const NoteItem = ({ note }: { note: Note }) => {
 
         <h2
           className="w-full opacity-90 text-left text-2xl font-bold"
-          onClick={() => router.push(`/dashboard/note/${UserId}/${ID}`)}
+          onClick={() => router.push(`/dashboard/note/${ID}`)}
         >
           <Balancer>{Title}</Balancer>
         </h2>

@@ -104,7 +104,6 @@ func (s *Storage) FetchAllNotes(userid string) (interface{}, error) {
 	if err.Error != nil {
 		return nil, err.Error
 	}
-	fmt.Println("NOTES :", notes)
 	return notes, nil
 }
 func (s *Storage) CreateNote(note *types.Note) (interface{}, error) {
@@ -144,6 +143,14 @@ func (s *Storage) UpdateNote(noteId string, payload *types.Note) (interface{}, e
 }
 func (s *Storage) DeleteNote(noteId string) error {
 	err := s.db.Where("ID = ?", noteId).Delete(&types.Note{})
+	if err != nil {
+		return err.Error
+	}
+	return nil
+}
+
+func (s *Storage) DeleteNotes(noteIds []types.NoteParam) error {
+	err := s.db.Model(&types.Note{}).Delete(noteIds)
 	if err != nil {
 		return err.Error
 	}
